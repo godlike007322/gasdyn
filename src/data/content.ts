@@ -1,69 +1,49 @@
 import { FormulaItem, PracticeTask, TheoryTopic } from '../types';
 
 export const formulas: FormulaItem[] = [
-  { id: 'f1', title: 'Материальная производная', latex: ' \\frac{Df}{Dt}=\\frac{\\partial f}{\\partial t} + (\\mathbf{v}\\cdot\\nabla)f' },
-  { id: 'f2', title: 'Неразрывность', latex: '\\frac{\\partial \\rho}{\\partial t}+\\mathrm{div}(\\rho \\mathbf{v})=0' },
-  { id: 'f3', title: 'Несжимаемая жидкость', latex: '\\mathrm{div}\\,\\mathbf{v}=0' },
-  { id: 'f4', title: 'Якобиан', latex: 'J=\\det\\left(\\frac{\\partial x_i}{\\partial a_j}\\right),\\quad dV=JdV_0' },
-  { id: 'f5', title: 'Навье–Стокс', latex: '\\frac{\\partial \\mathbf{v}}{\\partial t}+(\\mathbf{v}\\cdot\\nabla)\\mathbf{v}= -\\frac{1}{\\rho}\\nabla p+\\nu \\Delta \\mathbf{v}+\\mathbf{f}' }
+  { id: 'f1', title: 'Материальная производная', latex: '\\frac{Df}{Dt}=\\frac{\\partial f}{\\partial t} + (\\mathbf{v}\\cdot\\nabla)f' },
+  { id: 'f2', title: 'Число Кнудсена', latex: 'Kn=\\frac{\\lambda}{L}' },
+  { id: 'f3', title: 'Неразрывность (Эйлер)', latex: '\\frac{\\partial \\rho}{\\partial t}+\\mathrm{div}(\\rho \\mathbf{v})=0' },
+  { id: 'f4', title: 'Неразрывность (раскрыто)', latex: '\\frac{D\\rho}{Dt}+\\rho\\,\\mathrm{div}\\,\\mathbf{v}=0' },
+  { id: 'f5', title: 'Несжимаемая жидкость', latex: '\\mathrm{div}\\,\\mathbf{v}=0' },
+  { id: 'f6', title: 'Якобиан', latex: 'J=\\det\\left(\\frac{\\partial x_i}{\\partial a_j}\\right),\\quad dV=JdV_0' },
+  { id: 'f7', title: 'Эйлер (без вязкости)', latex: '\\rho\\frac{D\\mathbf v}{Dt}=-\\nabla p+\\rho\\mathbf f' },
+  { id: 'f8', title: 'Кинетическая энергия', latex: '\\rho\\frac{D(|\\mathbf v|^2/2)}{Dt}=-\\mathbf v\\cdot\\nabla p' },
+  { id: 'f9', title: 'Внутренняя энергия', latex: '\\rho\\frac{D\\varepsilon}{Dt}=-p\\,\\mathrm{div}\\,\\mathbf v' },
+  { id: 'f10', title: 'Адиабатичность', latex: '\\frac{p}{\\rho^\\gamma}=\\mathrm{const},\\quad \\frac{DS}{Dt}=0' },
+  { id: 'f11', title: 'Полная энергия', latex: '\\frac{\\partial(\\rho E)}{\\partial t}+\\mathrm{div}[\\mathbf v(\\rho E+p)]=0,\\quad E=\\varepsilon+|\\mathbf v|^2/2' },
+  { id: 'f12', title: 'Тензор напряжений', latex: '\\sigma_{ij}=-p\\delta_{ij}+\\tau_{ij}' },
+  { id: 'f13', title: 'Вязкие напряжения Ньютона', latex: '\\tau_{ij}=\\mu(\\partial v_i/\\partial x_j+\\partial v_j/\\partial x_i)+\\lambda\\,\\mathrm{div}(\\mathbf v)\\delta_{ij}' },
+  { id: 'f14', title: 'Навье–Стокс', latex: '\\frac{\\partial \\mathbf{v}}{\\partial t}+(\\mathbf{v}\\cdot\\nabla)\\mathbf{v}= -\\frac{1}{\\rho}\\nabla p+\\nu \\Delta \\mathbf{v}+\\mathbf{f}' },
+  { id: 'f15', title: 'Пуассон для давления', latex: '\\Delta p=-\\rho\\,\\mathrm{div}[(\\mathbf v\\cdot\\nabla)\\mathbf v]+\\rho\\,\\mathrm{div}\\mathbf f' },
+  { id: 'f16', title: 'Куэтт', latex: 'v_x(z)=\\frac{v_0}{d}z' },
+  { id: 'f17', title: 'Пуазейль', latex: 'v_x(z)=\\frac{p_1-p_2}{2\\mu L}(d^2-z^2)' }
 ];
 
 export const theoryTopics: TheoryTopic[] = [
-  {
-    id: 'th1', title: 'Приближение сплошной среды',
-    shortExplanation: 'Среду считаем непрерывной, чтобы в точке определять ρ, p, T, v.',
-    examAnswerFull: 'Критерий применимости: Kn=λ/L, при Kn<<1 модель сплошной среды корректна.',
-    formulas: [formulas[1]],
-    physicalMeaning: 'Микромир усредняется до макрополей.',
-    typicalMistakes: ['Путают масштаб усреднения l и характерный размер L.', 'Игнорируют Kn.']
-  },
-  {
-    id: 'th2', title: 'Эйлеров и лагранжев подходы',
-    shortExplanation: 'Эйлер: наблюдаем поле в точке. Лагранж: следим за частицей.',
-    examAnswerFull: 'Лагранж: x=x(a,t). Эйлер: v=v(x,t), ρ=ρ(x,t), p=p(x,t). Подходы эквивалентны.',
-    formulas: [formulas[0], formulas[3]],
-    physicalMeaning: 'Два эквивалентных языка описания одного движения.',
-    typicalMistakes: ['Смешивают независимые переменные x и a.']
-  },
-  {
-    id: 'th3', title: 'Неразрывность и несжимаемость',
-    shortExplanation: 'Закон сохранения массы в дифференциальной форме.',
-    examAnswerFull: '∂ρ/∂t + div(ρv)=0, или Dρ/Dt + ρ div v=0. Для несжимаемой жидкости div v=0.',
-    formulas: [formulas[1], formulas[2]],
-    physicalMeaning: 'Масса не исчезает и не возникает.',
-    typicalMistakes: ['Для несжимаемого течения ошибочно считают ρ переменной по времени.']
-  },
-  {
-    id: 'th4', title: 'Навье–Стокс и Пуассон для давления',
-    shortExplanation: 'Баланс импульса с учетом вязкости, давления и массовых сил.',
-    examAnswerFull: 'Для несжимаемой жидкости: ∂v/∂t+(v·∇)v=-(1/ρ)∇p+νΔv+f, div v=0; отсюда выводят уравнение Пуассона для p.',
-    formulas: [formulas[4]],
-    physicalMeaning: 'Давление и вязкость формируют структуру потока.',
-    typicalMistakes: ['Забывают условие div v=0 при выводе уравнения Пуассона.']
-  }
+  { id:'th1', title:'1. Приближение сплошной среды', shortExplanation:'Дискретную молекулярную среду заменяют непрерывной и вводят поля ρ,p,T,v.', examAnswerFull:'Объём усреднения должен содержать много молекул, но быть малым относительно масштаба задачи: λ ≪ l ≪ L. Критерий применимости — Kn=λ/L. При Kn≪1 (обычно Kn<0.01) приближение сплошной среды корректно.', formulas:[formulas[1]], physicalMeaning:'Макропараметры становятся гладкими функциями координат и времени.', typicalMistakes:['Не проверяют Kn перед применением уравнений сплошной среды.'] },
+  { id:'th2', title:'2. Подходы Эйлера и Лагранжа', shortExplanation:'Лагранж: следим за частицей. Эйлер: наблюдаем поля в точке пространства.', examAnswerFull:'Лагранжев подход: x=x(a,t), где a — метка частицы. Эйлеров подход: v=v(x,t), ρ=ρ(x,t), p=p(x,t). Подходы эквивалентны и взаимно переводимы.', formulas:[formulas[0]], physicalMeaning:'Одна физика описывается либо траекториями, либо полями.', typicalMistakes:['Путают набор независимых переменных в подходах.'] },
+  { id:'th3', title:'3. Якобиан и искажение объёмов', shortExplanation:'Якобиан показывает изменение элементарного объёма при движении частиц.', examAnswerFull:'J=∂(x1,x2,x3)/∂(a1,a2,a3)=det(∂xi/∂aj). Связь объёмов: dV=JdV0, значит K=dV/dV0=J. Для физически допустимого движения J>0, для несжимаемой среды J=1.', formulas:[formulas[5]], physicalMeaning:'Коэффициент локального растяжения/сжатия объёма.', typicalMistakes:['Забывают условие J>0.'] },
+  { id:'th4', title:'4. Связь лагранжевой и эйлеровой производных', shortExplanation:'Материальная производная = локальное изменение + перенос потоком.', examAnswerFull:'Df/Dt=∂f/∂t+(v·∇)f=∂f/∂t+vx∂f/∂x+vy∂f/∂y+vz∂f/∂z. В Лагранжевом описании это обычная производная вдоль частицы.', formulas:[formulas[0]], physicalMeaning:'Скорость изменения величины у движущейся частицы.', typicalMistakes:['Теряют конвективный член (v·∇)f.'] },
+  { id:'th5', title:'5. Переход Эйлер ↔ Лагранж по полю скорости', shortExplanation:'По известной скорости восстанавливают траектории частиц.', examAnswerFull:'Если v(a,t), то x(a,t)=a+∫ v(a,τ)dτ. Если v(x,t), то решают ОДУ: dx/dt=vx, dy/dt=vy, dz/dt=vz с начальными условиями x(t0)=ξ, y(t0)=η, z(t0)=ζ.', formulas:[formulas[0]], physicalMeaning:'Траектория — интеграл скорости по времени.', typicalMistakes:['Неправильно задают начальные условия для траекторий.'] },
+  { id:'th6', title:'6. Неразрывность в Эйлере и Лагранже', shortExplanation:'Закон сохранения массы.', examAnswerFull:'Эйлер: ∂ρ/∂t+div(ρv)=0 ⇔ Dρ/Dt+ρdivv=0. Лагранж: ρdV=ρ0dV0, dV=JdV0, поэтому ρJ=ρ0.', formulas:[formulas[2],formulas[3]], physicalMeaning:'Масса материального объёма постоянна.', typicalMistakes:['Не используют эквивалентность разных форм записи.'] },
+  { id:'th7', title:'7. Неразрывность для несжимаемой жидкости', shortExplanation:'Для несжимаемой жидкости объём частицы не меняется.', examAnswerFull:'Dρ/Dt=0, из общей неразрывности следует div v=0, то есть ∂vx/∂x+∂vy/∂y+∂vz/∂z=0.', formulas:[formulas[4]], physicalMeaning:'Кинематическое условие несжимаемости поля скорости.', typicalMistakes:['Подменяют условие div v=0 константностью давления.'] },
+  { id:'th8', title:'8. Изменение кинетической энергии', shortExplanation:'Кинетическая энергия меняется из-за работы давления.', examAnswerFull:'Для идеального бездиссипативного газа из ρDv/Dt=-∇p, после умножения на v: ρD(|v|²/2)/Dt=−v·∇p. В дивергентной форме: ∂(ρ|v|²/2)/∂t+div(ρv|v|²/2)=−v·∇p.', formulas:[formulas[7]], physicalMeaning:'Перераспределение кинетической энергии полем давления.', typicalMistakes:['Неверно используют тождество v·Dv/Dt=D(|v|²/2)/Dt.'] },
+  { id:'th9', title:'9. Внутренняя энергия и адиабатичность', shortExplanation:'Без вязкости и теплопроводности энтропия частицы сохраняется.', examAnswerFull:'ρDε/Dt=−p div v, DS/Dt=0. Для идеального газа эквивалентно p/ρ^γ=const вдоль траектории.', formulas:[formulas[8],formulas[9]], physicalMeaning:'Сжатие/расширение связывает внутреннюю энергию и работу давления.', typicalMistakes:['Путают изоэнтропичность частицы с изотермичностью процесса.'] },
+  { id:'th10', title:'10. Полная энергия идеального газа', shortExplanation:'Полная энергия = внутренняя + кинетическая.', examAnswerFull:'E=ε+|v|²/2. Уравнение: ∂(ρE)/∂t+div[v(ρE+p)]=0 (эквивалентно формам с ρv(E+p/ρ)).', formulas:[formulas[10]], physicalMeaning:'Перенос полной энергии потоком и работа давления.', typicalMistakes:['Забывают вклад кинетической энергии в E.'] },
+  { id:'th11', title:'11. Уравнение движения. Массовые силы', shortExplanation:'Баланс импульса для невязкой нетеплопроводной жидкости.', examAnswerFull:'ρDv/Dt=−∇p+ρf, или ρ[∂v/∂t+(v·∇)v]=−∇p+ρf. При отсутствии массовых сил: ρ[∂v/∂t+(v·∇)v]=−∇p.', formulas:[formulas[6]], physicalMeaning:'Ускорение задаётся градиентом давления и массовыми силами.', typicalMistakes:['Путают удельную силу f и объёмную ρf.'] },
+  { id:'th12', title:'12. Поверхностные силы и тензоры', shortExplanation:'Внутренние поверхностные силы описываются тензором напряжений.', examAnswerFull:'σij=−pδij+τij. Для ньютоновской жидкости τij=μ(∂vi/∂xj+∂vj/∂xi)+λdiv(v)δij. Диагональные элементы — удлинение, недиагональные — сдвиг.', formulas:[formulas[11],formulas[12]], physicalMeaning:'Разложение на изотропное давление и вязкое отклонение.', typicalMistakes:['Путают индексы и физический смысл компонент.'] },
+  { id:'th13', title:'13. Навье–Стокс (несжимаемая жидкость)', shortExplanation:'Импульс с вязкой диффузией при div v=0.', examAnswerFull:'При ρ=const, μ=const, ν=μ/ρ: ρ[∂v/∂t+(v·∇)v]=−∇p+μΔv+ρf, или ∂v/∂t+(v·∇)v=−(1/ρ)∇p+νΔv+f, div v=0.', formulas:[formulas[13]], physicalMeaning:'Конкуренция конвекции, давления и вязкости.', typicalMistakes:['Используют форму для сжимаемого течения без нужных членов.'] },
+  { id:'th14', title:'14. Уравнение Пуассона для давления', shortExplanation:'Давление в несжимаемом течении находится из Пуассона.', examAnswerFull:'Берут div от НС и используют div v=0: Δp=−ρ div[(v·∇)v]+ρ div f. Без массовых сил: Δp=−ρ div[(v·∇)v]. Часто: Δp=−ρ(∂vi/∂xj)(∂vj/∂xi).', formulas:[formulas[14]], physicalMeaning:'Давление обеспечивает совместимость поля скорости с несжимаемостью.', typicalMistakes:['Пропускают член div f при наличии массовых сил.'] }
 ];
 
 export const practiceTasks: PracticeTask[] = [
-  {
-    id: 'pr1', title: 'Течение Куэтта',
-    condition: 'Слой толщиной d, верхняя стенка движется со скоростью v0, нижняя неподвижна.',
-    hints: {
-      eqHint: 'Используйте стационарное уравнение Навье–Стокса без градиента давления.',
-      firstStepHint: 'Получите μ d²v_x/dz² = 0 и интегрируйте дважды.',
-      formulaHint: 'v_x(0)=0, v_x(d)=v_0.'
-    },
-    fullSolution: 'v_x=C1 z + C2, C2=0, C1=v0/d, значит v_x(z)=v0 z/d.',
-    templateForSimilar: '1) Упростить НС по симметрии; 2) дважды интегрировать; 3) подставить граничные условия.'
-  },
-  {
-    id: 'pr2', title: 'Течение Пуазейля',
-    condition: 'Плоский канал -d≤z≤d, перепад давления p1→p2 по длине L.',
-    hints: {
-      eqHint: 'Взять x-компонент НС: -∂p/∂x + μ d²v_x/dz² = 0.',
-      firstStepHint: 'Подставить ∂p/∂x=(p2-p1)/L.',
-      formulaHint: 'Использовать v_x(±d)=0.'
-    },
-    fullSolution: 'Параболический профиль: v_x(z)=((p1-p2)/(2μL))(d²-z²).',
-    templateForSimilar: 'При линейном градиенте давления профиль в щели/трубе обычно квадратичный.'
-  }
+  { id:'pr1', title:'1. Течение Куэтта', condition:'Слой толщиной d: нижняя стенка неподвижна, верхняя движется со скоростью v0. Найти профиль скорости.', hints:{eqHint:'Стационарный НС без перепада давления: μ d²vx/dz²=0.', firstStepHint:'Дважды интегрируйте: vx=C1z+C2.', formulaHint:'Границы: vx(0)=0, vx(d)=v0.'}, fullSolution:'Из vx(0)=0 получаем C2=0, из vx(d)=v0 получаем C1=v0/d. Ответ: vx(z)=v0 z/d, v=((v0/d)z,0,0).', templateForSimilar:'1) Упростить НС; 2) интегрировать ОДУ; 3) подставить условия прилипания.' },
+  { id:'pr2', title:'2. Течение Пуазейля', condition:'Плоский слой −d≤z≤d, длина L, p(0)=p1, p(L)=p2. Найти vx(z).', hints:{eqHint:'x-компонента: −∂p/∂x+μ d²vx/dz²=0.', firstStepHint:'Подставить ∂p/∂x=(p2−p1)/L.', formulaHint:'Использовать vx(−d)=0 и vx(d)=0.'}, fullSolution:'После интегрирования: vx=((p2−p1)/(2μL))z²+C1z+C2. По симметрии C1=0, затем C2=−((p2−p1)/(2μL))d². Итог: vx(z)=((p1−p2)/(2μL))(d²−z²).', templateForSimilar:'Для ламинарного течения с постоянным градиентом давления в щели получается парабола.' },
+  { id:'pr3', title:'3. D/Dt ln(1/ρ)', condition:'Найти материальную производную D/Dt ln(1/ρ).', hints:{eqHint:'Использовать D/Dt=∂/∂t+(v·∇).', firstStepHint:'ln(1/ρ)=−lnρ ⇒ D ln(1/ρ)/Dt=−(1/ρ)Dρ/Dt.', formulaHint:'Из неразрывности Dρ/Dt=−ρ div v.'}, fullSolution:'D ln(1/ρ)/Dt=−(1/ρ)(−ρ div v)=div v.', templateForSimilar:'Сводите задачу к Dρ/Dt и подставляйте неразрывность.' },
+  { id:'pr4', title:'4. Скорость при ρ=t²', condition:'Дано ρ(x,t)=t². Из одномерной неразрывности найти v(x,t).', hints:{eqHint:'∂ρ/∂t+∂(ρv)/∂x=0.', firstStepHint:'∂ρ/∂t=2t, ∂(ρv)/∂x=t²∂v/∂x.', formulaHint:'Получите ∂v/∂x=−2/t и интегрируйте по x.'}, fullSolution:'v(x,t)=−2x/t+C(t). При условии v(0,t)=0: C(t)=0 и v=−2x/t.', templateForSimilar:'При ρ без x зависимость v находится интегрированием ∂v/∂x.' },
+  { id:'pr5', title:'5. Скорость при ρ=1/(1+x²)', condition:'Дано ρ(x,t)=1/(1+x²), стационарное 1D течение. Найти v(x).', hints:{eqHint:'Для стационарного случая ∂ρ/∂t=0.', firstStepHint:'Из неразрывности следует ∂(ρv)/∂x=0.', formulaHint:'Следовательно ρv=C.'}, fullSolution:'v=C/ρ=C(1+x²).', templateForSimilar:'В стационарном 1D потоке расход ρv постоянен.' },
+  { id:'pr6', title:'6. Неразрывность + движение ⇒ импульс', condition:'Показать эквивалентность: {∂ρ/∂t+div(ρv)=0, ρDv/Dt=F} ⇒ ∂(ρv)/∂t+div(ρv⊗v)=F.', hints:{eqHint:'Раскрыть обе производные в консервативной форме.', firstStepHint:'Использовать ∂(ρv)/∂t=ρ∂v/∂t+v∂ρ/∂t.', formulaHint:'Сгруппировать v[∂ρ/∂t+div(ρv)] и занулить по неразрывности.'}, fullSolution:'∂(ρv)/∂t+div(ρv⊗v)=ρ[∂v/∂t+(v·∇)v]+v[∂ρ/∂t+div(ρv)]=ρDv/Dt=F.', templateForSimilar:'Для перехода к консервативной форме добавляйте и вычитайте члены с уравнением массы.' },
+  { id:'pr7', title:'7. v(ξ,t)=ξ+t ⇒ v(x,t)', condition:'Дано лагранжево поле скорости v(ξ,t)=ξ+t, t0=0. Найти эйлерову форму v(x,t).', hints:{eqHint:'Использовать dx/dt=v(ξ,t).', firstStepHint:'Интегрировать x=ξt+t²/2+C и найти C из x(ξ,0)=ξ.', formulaHint:'Выразить ξ через x,t и подставить в v=ξ+t.'}, fullSolution:'x(ξ,t)=ξ(1+t)+t²/2 ⇒ ξ=[x−t²/2]/(1+t). Тогда v(x,t)=[x+t+t²/2]/(1+t).', templateForSimilar:'Всегда сначала строится траектория x(ξ,t), затем инвертируется связь ξ(x,t).' },
+  { id:'pr8', title:'8. Температура: Эйлер → Лагранж', condition:'Дано v(x,t)=t, T(x,t)=x/t, t0=0. Перейти к T(ξ,t) и сверить производные.', hints:{eqHint:'Сначала найти траекторию: dx/dt=t.', firstStepHint:'x(ξ,t)=ξ+t²/2 из условия x(ξ,0)=ξ.', formulaHint:'Подставить в T и сравнить DT/Dt с dT(ξ,t)/dt.'}, fullSolution:'T(ξ,t)=(ξ+t²/2)/t=ξ/t+t/2. Эйлерово: DT/Dt=∂T/∂t+v∂T/∂x=−x/t²+1. На траектории x=ξ+t²/2 получаем −ξ/t²+1/2. Лагранжево: d/dt(ξ/t+t/2)=−ξ/t²+1/2. Совпадает.', templateForSimilar:'Проверка эквивалентности: материальная производная в Эйлере = обычная вдоль траектории.' }
 ];
