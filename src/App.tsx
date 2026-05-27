@@ -22,7 +22,7 @@ function Learn() {
   const [id, setId] = useState(theoryTopics[0].id);
   const t = theoryTopics.find(x=>x.id===id)!;
   return <section><h2>Учить тему</h2><select value={id} onChange={e=>setId(e.target.value)}>{theoryTopics.map(t=><option key={t.id} value={t.id}>{t.title}</option>)}</select>
-    <h3>Простое объяснение</h3><p>{t.shortExplanation}</p><h3>Экзаменационный ответ</h3><p>{t.examAnswerFull}</p><h3>Ключевые формулы</h3>{t.formulas.map(f=><MathBlock key={f.id} latex={f.latex}/>)}<h3>Физический смысл</h3><p>{t.physicalMeaning}</p><h3>Типичные ошибки</h3><ul>{t.typicalMistakes.map(m=><li key={m}>{m}</li>)}</ul></section>;
+    <h3>Простое объяснение</h3><p>{t.shortExplanation}</p><h3>Экзаменационный ответ</h3><p>{t.examAnswerFull}</p><h3>Формулы по теме (красивый вид)</h3>{t.formulas.map(f=><MathBlock key={f.id} latex={f.latex}/>)}<h3>Физический смысл</h3><p>{t.physicalMeaning}</p></section>;
 }
 
 function Quiz() {const [i, setI]=useState(0); const q=theoryTopics[i]; const [show,setShow]=useState(false); return <section><h2>Опрос</h2><p>{q.title}</p><button onClick={()=>setShow(true)}>Показать эталон</button>{show&&<p>{q.examAnswerFull}</p>}

@@ -14,7 +14,6 @@ export interface TheoryTopic {
   examAnswerFull: string;
   formulas: FormulaItem[];
   physicalMeaning: string;
-  typicalMistakes: string[];
 }
 
 export interface PracticeTask {
